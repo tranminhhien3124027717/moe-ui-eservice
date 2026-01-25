@@ -1,0 +1,88 @@
+@use '../assets/styles/_variables' as *;
+
+// --- 1. KHUNG BAO NGOÀI CÙNG ---
+.app-layout-main {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  // --- 2. WRAPPER (CHỨA SIDEBAR + CONTENT) ---
+  .layout-content-wrapper {
+    margin-top: 0;     
+    height: 100vh;   
+    display: flex;
+    position: relative;
+    
+
+    z-index: 1; 
+
+    // --- 3. SIDEBAR (DESKTOP) ---
+    .layout-sider {
+      height: 100% !important;
+      background: #fff;
+      border-right: 1px solid #f0f0f0;
+      overflow-y: auto;
+      
+
+      padding-top: $header-height; 
+
+      &::-webkit-scrollbar { width: 0; }
+
+      @media (max-width: $screen-lg) {
+        display: none !important;
+      }
+    }
+
+    // --- 4. MAIN CONTENT ---
+    .layout-content {
+      flex: 1;
+      height: 100%;
+      overflow-y: auto; 
+      background-color: #f8fafc;
+      scroll-behavior: smooth;
+
+
+      padding: 24px;
+      padding-top: calc(#{$header-height} + 24px); 
+
+      @media (max-width: $screen-lg) {
+        padding: 16px;
+        width: 100%;
+        // Responsive padding cho mobile
+        padding-top: calc(#{$header-height} + 16px);
+      }
+    }
+  }
+}
+
+// --- 5. MOBILE TOGGLE BTN (Giữ nguyên) ---
+.mobile-toggle-btn {
+  display: none !important;
+  cursor: pointer;
+
+  @media (max-width: $screen-lg) {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16px;
+    font-size: 20px;
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    transition: background 0.2s;
+    z-index: 1001;
+    
+    &:hover, &:active {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+  }
+}
+
+// --- 6. DRAWER RESPONSIVE (Giữ nguyên) ---
+.responsive-drawer {
+  .ant-drawer-body {
+    padding: 0;
+    overflow-y: auto;
+  }
+}

@@ -1,0 +1,160 @@
+// Variables matching the global theme
+$primary-color: #0f766e;
+$primary-hover: #115e59;
+$error-bg: #fef2f2;
+$error-text: #ef4444;
+$border-radius: 8px;
+$border-color: #e2e8f0;
+$text-sub: #64748b;
+$text-main: #1e293b;
+$bg-sub: #f8fafc;
+
+.stripe-payment-form {
+  width: 100%; 
+  padding: 4px 2px; /* Prevent focus outlines from being clipped */
+
+  /* ==========================================================================
+     1. STRIPE ELEMENT CONTAINER
+     - Wraps the Stripe Iframe.
+     - Handles the locking mechanism (Visual disable).
+     ========================================================================== */
+  .stripe-element-container {
+    margin-bottom: 24px;
+    min-height: 200px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    // Smooth transition for the disabled state
+    transition: opacity 0.3s ease, filter 0.3s ease;
+
+    /* [STATE] Disabled / Locked */
+    /* Applied when payment is processing */
+    &.is-disabled {
+      opacity: 0.6;              /* Fade out content */
+      pointer-events: none;      /* Prevent clicks/focus */
+      filter: grayscale(0.5);    /* Optional: Desaturate to indicate inactive */
+      user-select: none;         /* Prevent text selection */
+    }
+  }
+
+  /* ==========================================================================
+     2. ERROR MESSAGE
+     - Styled alert box for validation errors.
+     ========================================================================== */
+  .error-message {
+    background-color: $error-bg;
+    color: $error-text;
+    border: 1px solid rgba($error-text, 0.2);
+    padding: 12px 16px;
+    border-radius: $border-radius;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: fadeIn 0.3s ease;
+
+    /* Exclamation Icon */
+    &::before {
+      content: '!';
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      background: $error-text;
+      color: white;
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+  }
+
+  /* ==========================================================================
+     3. FOOTER ACTIONS
+     - Buttons aligned to the right.
+     - Styles match the parent Modal (Solid Teal Color).
+     ========================================================================== */
+  .form-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 12px;
+    padding-top: 24px;
+    border-top: 1px solid #f1f5f9;
+
+    /* Cancel Button */
+    .btnCancel {
+      height: 44px;
+      padding: 0 24px;
+      border-radius: $border-radius;
+      border: 1px solid $border-color;
+      font-weight: 600;
+      color: $text-sub;
+      background: transparent;
+      
+      &:hover {
+        background: $bg-sub;
+        color: $text-main;
+        border-color: #cbd5e1;
+      }
+
+      &:disabled {
+        background: #f1f5f9;
+        color: #cbd5e1;
+        cursor: not-allowed;
+      }
+    }
+
+    /* Pay Button */
+    .btnPay {
+      height: 44px;
+      padding: 0 32px;
+      border-radius: $border-radius;
+      font-weight: 600;
+      font-size: 15px;
+      border: none;
+      
+      /* Solid Color Style */
+      background-color: $primary-color;
+      color: white;
+      box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+      transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+      
+      &:hover:not(:disabled) {
+        background-color: $primary-hover;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(15, 118, 110, 0.2);
+        border: none;
+      }
+
+      &:active:not(:disabled) {
+        transform: translateY(0);
+        background-color: $primary-color;
+        box-shadow: none;
+      }
+
+      &:disabled {
+        background-color: #e2e8f0;
+        color: #94a3b8;
+        box-shadow: none;
+        cursor: not-allowed;
+        transform: none;
+      }
+      
+      /* Override Antd loading icon color */
+      .ant-btn-loading-icon {
+        color: white;
+      }
+    }
+  }
+}
+
+/* Simple Fade In Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
