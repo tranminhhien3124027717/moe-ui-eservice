@@ -1,0 +1,54 @@
+@use "../../assets/styles/_variables" as *;
+
+.balancePage {
+  padding: 32px;
+  min-height: 100vh;
+  font-family: "Inter", sans-serif;
+  width: 100%;
+
+  @media (max-width: 768px) { padding: 24px; }
+  @media (max-width: 480px) { padding: 16px; }
+
+  // Page Header
+  .pageHeader {
+    margin-bottom: 24px;
+    .pageTitle {
+      margin: 0 !important;
+      font-weight: 700;
+      color: #0f172a;
+      font-size: 24px;
+    }
+    .pageSubtitle {
+      color: #64748b;
+      font-size: 14px;
+    }
+  }
+
+  // History Container Box
+  .historyContainer {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 24px;
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.05);
+    padding: 32px;
+    margin-bottom: 40px;
+    overflow: hidden;
+
+    @media (max-width: 768px) { padding: 24px; }
+
+    .containerHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+
+      .left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        .headerIcon { font-size: 20px; color: #0f766e; }
+        .headerTitle { font-size: 20px; font-weight: 800; color: #1e293b; }
+      }
+    }
+  }
+}

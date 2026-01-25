@@ -1,0 +1,207 @@
+@use "../../../../assets/styles/_variables" as *;
+
+.filterToolbar {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+
+  @media (max-width: 768px) {
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  @media (max-width: 480px) {
+    gap: 8px;
+    margin-bottom: 12px;
+    flex-direction: column;
+  }
+
+  // Search box
+  .searchBox {
+    flex: 1;
+    min-width: 250px;
+
+    @media (max-width: 768px) {
+      min-width: 200px;
+    }
+
+    @media (max-width: 480px) {
+      min-width: 100%;
+      width: 100%;
+    }
+
+    .searchInput {
+      height: 40px;
+      border-radius: 8px;
+      background-color: #fffdfd;
+      border: 1px solid #e2e8f0;
+      font-size: 14px;
+      width: 100%;
+      padding: 4px 11px;
+
+      @media (max-width: 480px) {
+        height: 38px;
+        font-size: 13px;
+      }
+
+      :global {
+        input {
+          font-size: 14px;
+          font-weight: 500;
+          color: #1e293b;
+          background-color: transparent !important;
+
+          &::placeholder {
+            color: #94a3b8;
+            font-size: 13px;
+          }
+        }
+      }
+
+      &:hover,
+      &:focus-within {
+        border-color: #1e3a8a;
+        box-shadow: 0 0 0 2px rgba(30, 58, 138, 0.05);
+      }
+    }
+  }
+
+  .filterActions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+
+    @media (max-width: 768px) {
+      gap: 10px;
+    }
+
+    @media (max-width: 480px) {
+      gap: 8px;
+      width: 100%;
+    }
+
+    // Filter wrapper with icon
+    .selectWrapper {
+      position: relative;
+      flex: 0 0 auto;
+      min-width: 140px;
+
+      @media (max-width: 768px) {
+        min-width: calc(50% - 5px);
+        flex: 1 1 calc(50% - 5px);
+      }
+
+      @media (max-width: 480px) {
+        min-width: 100%;
+        flex: 1 1 100%;
+      }
+
+      // Icon positioning
+      .selectIcon {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        margin-right: 10px;
+        transform: translateY(-50%);
+        z-index: 10;
+        color: #64748b;
+        font-size: 16px;
+        pointer-events: none;
+
+        @media (max-width: 480px) {
+          font-size: 14px;
+          left: 10px;
+        }
+      }
+
+      // Select styling
+      .filterSelect {
+        width: 100%;
+
+        :global {
+          .ant-select-content {
+            background-color: #fffdfd !important;
+            height: 30px !important; 
+            display: flex;
+            align-items: center;
+            padding-left: 40px !important;
+            padding-right: 12px !important;
+            box-shadow: none !important;
+            font-weight: 600;
+          }
+
+          .ant-select-selector {
+             height: 40px !important;
+             background: transparent !important;
+             border: none !important;
+             box-shadow: none !important;
+             padding: 0 !important;
+          }
+
+          // Override lại selector của Antd để khớp với code cũ
+          .ant-select-selector {
+             // Code cũ bạn viết lồng trong :global nên tôi giữ nguyên logic
+             height: 40px !important;
+             border-radius: 8px !important;
+             border-color: #e2e8f0 !important;
+             display: flex;
+             align-items: center;
+             // padding-left được xử lý ở selectWrapper > .selectIcon
+          }
+
+          .ant-select-content:hover {
+            border-color: #cbd5e1 !important;
+          }
+
+          .ant-select-selection-item {
+            line-height: 40px !important;
+            color: #475569;
+            font-size: 14px;
+            font-weight: 500;
+          }
+
+          .ant-select-focused .ant-select-selector {
+            border-color: #0f766e !important;
+            box-shadow: 0 0 0 2px rgba(15, 118, 110, 0.1) !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+// 2. Global dropdown styling (Copy nguyên bản)
+:global {
+  .balance-dropdown {
+    .ant-select-dropdown {
+      border-radius: 8px;
+      padding: 4px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .ant-select-item {
+      border-radius: 6px;
+      color: #475569;
+      font-size: 14px;
+      padding: 8px 12px;
+      margin-bottom: 2px;
+
+      @media (max-width: 480px) {
+        font-size: 12px;
+        padding: 6px 10px;
+      }
+
+      &-option-selected {
+        background-color: #e0f2fe !important;
+        color: #0369a1;
+        font-weight: 600;
+      }
+
+      &:hover {
+        background-color: #f8fafc !important;
+      }
+    }
+  }
+}

@@ -1,0 +1,357 @@
+// --- Variables ---
+$color-primary: #117a65;
+$color-primary-hover: #0e6655;
+$color-bg-icon: #e9f2f0;
+$color-text-main: #111827;
+$color-text-sub: #6b7280;
+$color-label: #9ca3af;
+$color-border: #e5e7eb;
+$color-bg-page: #f9fafb;
+$color-bg-alert: #f3f4f6;
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// --- PAGE SPECIFIC STYLES ---
+.userProfilePage {
+  background-color: $color-bg-page;
+  min-height: 100vh;
+  padding: 32px 24px;
+  font-family: "Inter", sans-serif;
+
+  .pageContainer { 
+    max-width: 1200px; 
+    margin: 0 auto; 
+  }
+
+  .pageHeader {
+    margin-bottom: 32px;
+    h1 { 
+      font-size: 28px; 
+      font-weight: 700; 
+      color: $color-text-main; 
+      margin-bottom: 8px; 
+    }
+    p { 
+      color: $color-text-sub; 
+      font-size: 15px; 
+    }
+  }
+}
+
+// --- GLOBAL COMPONENT STYLES ---
+// 1. Profile Card 
+.profileCard {
+  background: #fff;
+  border: 1px solid $color-border;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  margin-bottom: 28px;
+  overflow: hidden;
+
+  // Header (cardHeader)
+  .cardHeader {
+    padding: 28px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fafafa;
+
+    &.isBordered { border-bottom: 1px solid $color-border; }
+
+    .headerLeft {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex: 1;
+    }
+
+    .iconContainer { 
+      width: 56px; 
+      height: 56px;
+      background-color: $color-bg-icon;
+      border-radius: 12px;
+      flex-shrink: 0;
+      @include flex-center;
+
+      :global(.anticon) { 
+        font-size: 28px; 
+        color: $color-primary; 
+      }
+    }
+
+    .headerContent {
+      flex: 1;
+      h3 { 
+        margin: 0 0 6px 0; 
+        font-size: 18px; 
+        font-weight: 600; 
+        color: $color-text-main; 
+      }
+      span { 
+        font-size: 14px; 
+        color: $color-text-sub; 
+      }
+    }
+
+    .headerActions {
+      display: flex;
+      gap: 12px;
+      flex-shrink: 0;
+
+      .btnEdit,
+      .btnSync {
+        height: 40px; 
+        padding: 0 16px; 
+        border-radius: 8px; 
+        font-weight: 500;
+        font-size: 14px;
+        border: 1px solid $color-border;
+        color: $color-text-main;
+        cursor: pointer;
+        transition: all 0.3s;
+        
+        &:hover { 
+          color: $color-primary; 
+          border-color: $color-primary; 
+        }
+      }
+
+      .btnSync {
+        background-color: #ecf5f3;
+        color: $color-primary;
+        border-color: $color-primary;
+
+        &:hover {
+          background-color: #d9ebea;
+          border-color: $color-primary-hover;
+          color: $color-primary-hover;
+        }
+
+        :global(.anticon) {
+          margin-right: 6px;
+        }
+      }
+    }
+  }
+
+  // Content
+  .cardContent { 
+    padding: 32px; 
+  }
+
+  // Info Field (infoField)
+  .infoField {
+    margin-bottom: 12px;
+    
+    label {
+      display: block; 
+      font-size: 12px; 
+      font-weight: 600;
+      text-transform: uppercase; 
+      color: $color-label;
+      margin-bottom: 8px; 
+      letter-spacing: 0.05em;
+    }
+    
+    .value {
+      font-size: 16px; 
+      color: $color-text-main; 
+      font-weight: 400;
+      line-height: 1.6;
+      
+      &.valueBold { font-weight: 500; } 
+    }
+  }
+
+  // Form Styling
+  :global {
+    .ant-form-item { 
+      margin-bottom: 20px; 
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    
+    .ant-form-item-label > label { 
+      font-size: 14px; 
+      font-weight: 500; 
+      color: $color-text-main;
+      height: auto;
+    }
+    
+    .ant-input, 
+    .ant-input-affix-wrapper,
+    .ant-input-number {
+      border-radius: 8px; 
+      border: 1px solid $color-border;
+      font-size: 14px;
+      padding: 8px 12px;
+      
+      &:hover {
+        border-color: $color-primary;
+      }
+      
+      &:focus,
+      &:focus-visible {
+        border-color: $color-primary;
+        box-shadow: 0 0 0 2px rgba(17, 122, 101, 0.1);
+      }
+    }
+  }
+
+  // Footer Actions
+  .formFooter {
+    margin-top: 32px; 
+    padding-top: 28px; 
+    border-top: 1px solid $color-border;
+    display: flex; 
+    justify-content: flex-end; 
+    gap: 12px;
+    
+    .btnSave { 
+      background-color: $color-primary; 
+      border-color: $color-primary; 
+      color: #fff;
+      height: 40px;
+      padding: 0 24px;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s;
+      
+      &:hover { 
+        background-color: $color-primary-hover; 
+        border-color: $color-primary-hover; 
+      }
+    }
+    
+    .btnCancel {
+      height: 40px; 
+      padding: 0 24px; 
+      border-radius: 8px; 
+      font-weight: 500;
+      font-size: 14px;
+      border: 1px solid $color-border; 
+      color: $color-text-main;
+      background-color: #fff;
+      cursor: pointer;
+      transition: all 0.3s;
+      
+      &:hover { 
+        color: $color-primary; 
+        border-color: $color-primary; 
+      }
+    }
+  }
+}
+
+// --- RESPONSIVE DESIGN ---
+@media (max-width: 768px) {
+  .userProfilePage {
+    padding: 24px 16px;
+
+    .pageContainer {
+      max-width: 100%;
+    }
+
+    .pageHeader {
+      margin-bottom: 24px;
+      h1 { 
+        font-size: 24px; 
+      }
+      p { 
+        font-size: 14px; 
+      }
+    }
+  }
+
+  .profileCard {
+    margin-bottom: 20px;
+
+    .cardHeader {
+      padding: 20px 24px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+
+      .headerLeft {
+        width: 100%;
+      }
+
+      .headerActions {
+        width: 100%;
+        justify-content: flex-start;
+
+        .btnEdit,
+        .btnSync {
+          flex: 1;
+          text-align: center;
+        }
+      }
+    }
+
+    .cardContent {
+      padding: 20px 24px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .userProfilePage {
+    padding: 16px 12px;
+
+    .pageHeader {
+      margin-bottom: 16px;
+      h1 { 
+        font-size: 20px; 
+      }
+      p { 
+        font-size: 13px; 
+      }
+    }
+  }
+
+  .profileCard {
+    margin-bottom: 16px;
+    border-radius: 8px;
+
+    .cardHeader {
+      padding: 16px 20px;
+
+      .iconContainer {
+        width: 48px;
+        height: 48px;
+
+        :global(.anticon) {
+          font-size: 24px;
+        }
+      }
+
+      .headerContent h3 {
+        font-size: 16px;
+      }
+
+      .headerActions {
+        flex-direction: column;
+        width: 100%;
+
+        .btnEdit,
+        .btnSync {
+          width: 100%;
+          height: 36px;
+          font-size: 13px;
+        }
+      }
+    }
+
+    .cardContent {
+      padding: 16px 20px;
+    }
+  }
+}

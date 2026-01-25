@@ -1,0 +1,214 @@
+@use '../../assets/styles/_variables' as *;
+
+// --- VARIABLES ---
+$primary-color: #0f766e;
+$success-color: #10b981;
+$error-color: #ef4444;
+$warning-bg: #fff7ed;
+$warning-text: #c2410c;
+$bg-page: #f1f5f9; 
+$text-main: #1e293b; 
+$text-sub: #64748b;  
+$shadow-card: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+// --- GLOBAL LAYOUT ---
+.pageContainer {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  animation: fadeIn 0.5s ease-out;
+}
+
+// --- LOADING ---
+.loadingContainer {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+
+  .spinnerWrapper {
+    text-align: center;
+    p { margin-top: 16px; color: $text-sub; font-weight: 500; }
+  }
+}
+
+// ============================================================================
+// COMMON CARD STYLES (Shared structure for Success & Error)
+// ============================================================================
+.receiptCard, .errorCard {
+  width: 100%;
+  max-width: 480px;
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: $shadow-card;
+  padding: 40px 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==========================================================================
+   SUCCESS CARD SPECIFICS
+   ========================================================================== */
+.receiptCard {
+  // Top decorative bar (Green/Teal)
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 6px;
+    background: linear-gradient(90deg, #0f766e, #2dd4bf);
+  }
+
+  .successHeader {
+    margin-bottom: 8px;
+    .successIcon {
+      font-size: 64px;
+      color: $success-color;
+      margin-bottom: 16px;
+      display: block;
+      filter: drop-shadow(0 4px 6px rgba(16, 185, 129, 0.2));
+    }
+    .title {
+      color: $text-main !important;
+      margin-bottom: 8px !important;
+      font-weight: 800 !important;
+    }
+  }
+
+  .amountSection {
+    background-color: #f8fafc;
+    padding: 20px;
+    border-radius: 16px;
+    margin-bottom: 24px;
+
+    .label { font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+    .amount {
+      font-size: 36px; font-weight: 800; color: $primary-color; line-height: 1.2; margin: 4px 0 8px 0;
+    }
+    .statusTag { border-radius: 20px; font-weight: 700; padding: 0 12px; }
+  }
+
+  .detailsGrid {
+    display: flex; flex-direction: column; gap: 16px;
+    .row {
+      display: flex; justify-content: space-between; align-items: center; font-size: 14px;
+      .label { color: $text-sub; font-weight: 500; }
+      .value { color: $text-main; font-weight: 600; }
+      .valueMonospace {
+        font-family: 'SF Mono', 'Roboto Mono', monospace;
+        color: $text-main; background: #f1f5f9; padding: 4px 8px; border-radius: 6px; font-size: 13px;
+      }
+      .valueHighlight { color: $text-main; font-weight: 700; }
+      .copyIcon { font-size: 12px; color: #94a3b8; cursor: pointer; margin-left: 6px; }
+    }
+  }
+}
+
+/* ==========================================================================
+   ERROR CARD SPECIFICS (Redesigned)
+   ========================================================================== */
+.errorCard {
+  // Top decorative bar (Red)
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 6px;
+    background: linear-gradient(90deg, #ef4444, #f87171);
+  }
+
+  .errorHeader {
+    .iconWrapper {
+      width: 80px; height: 80px;
+      margin: 0 auto 16px auto;
+      background-color: #fef2f2;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .errorIcon {
+      font-size: 48px;
+      color: $error-color;
+    }
+    .title {
+      color: $text-main !important;
+      margin-bottom: 8px !important;
+      font-weight: 800 !important;
+    }
+    .subtitle {
+      color: $text-sub;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+  }
+
+  .warningBox {
+    background-color: $warning-bg;
+    border: 1px solid #ffedd5;
+    border-radius: 12px;
+    padding: 16px;
+    margin: 16px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    text-align: left;
+
+    .warningIcon { font-size: 18px; color: #f97316; margin-top: 2px; }
+    .warningText { color: $warning-text; font-size: 13px; line-height: 1.4; }
+  }
+
+  .supportSection {
+    margin-top: 8px;
+    .referenceId {
+      margin-top: 4px;
+      font-family: monospace;
+      font-size: 16px;
+      font-weight: 700;
+      color: $text-main;
+      letter-spacing: 1px;
+      .copyIcon { margin-left: 8px; color: $text-sub; cursor: pointer; }
+    }
+  }
+}
+
+// --- SHARED ACTIONS ---
+.actions {
+  display: flex;
+  gap: 12px;
+  @media (max-width: 400px) { flex-direction: column; }
+
+  .primaryBtn {
+    flex: 1;
+    height: 48px;
+    border-radius: 12px;
+    font-weight: 600;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    
+    // Error card specific primary button
+    &.ant-btn-dangerous {
+        box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.2);
+    }
+  }
+
+  .secondaryBtn {
+    flex: 1;
+    height: 48px;
+    border-radius: 12px;
+    font-weight: 600;
+    border: 1px solid #cbd5e1;
+    color: $text-sub;
+    &:hover {
+      border-color: $text-sub;
+      color: $text-main;
+    }
+  }
+}
+
+// Animation
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
