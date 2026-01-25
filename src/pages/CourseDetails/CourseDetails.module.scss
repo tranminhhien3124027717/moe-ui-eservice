@@ -455,4 +455,98 @@ $shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.03);
       box-shadow: 0 8px 20px rgba(15, 118, 110, 0.35);
     }
   }
+
+  // 5. Expandable Row Styles
+  .expandIcon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: transparent;
+    color: #64748b;
+    cursor: pointer;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $text-main;
+    }
+  }
+
+  .childTable {
+    width: 100%;
+    table-layout: fixed;
+    background: #f8fafc;
+    
+    // Animation: Hiệu ứng xuất hiện mượt mà
+    animation: slideDown 0.3s ease-out;
+
+    tbody {
+      .childRow {
+        td {
+          font-size: 14px;
+          color: #475569;
+          padding: 16px 24px;
+          border-bottom: 1px solid #e2e8f0;
+          vertical-align: middle;
+        }
+
+        &:last-child td {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+
+  // Animation keyframes
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  // ĐIỀU CHỈNH COLUMN WIDTHS: Đảm bảo width khớp với parent table columns
+  // Cột expand icon space - chiếm chỗ của expand button
+  .childExpandSpace {
+    width: 34px;
+    padding: 0 !important;
+  }
+
+  .childCol1 {
+    width: 150px;  // Payment Date column
+  }
+
+  .childCol2 {
+    width: auto;  // Course Name column (flexible)
+  }
+
+  .childCol3 {
+    width: 130px;  // Paid Cycle column
+  }
+
+  .childCol4 {
+    width: 130px;  // Amount column
+    text-align: center;
+  }
+
+  .childCol5 {
+    width: 180px;  // Payment Method column
+  }
+
+  .childCol6 {
+    width: 140px;  // Status column
+    text-align: center;
+  }
+
+  .childLabel {
+    font-size: 13px;
+    font-weight: 600;
+    color: #64748b;
+  }
 }
