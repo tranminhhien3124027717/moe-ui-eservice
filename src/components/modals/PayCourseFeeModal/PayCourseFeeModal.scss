@@ -1,0 +1,458 @@
+@use "../../../assets/styles/_variables" as *;
+
+/* ==========================================================================
+   VARIABLES & THEME
+   ========================================================================== */
+$primary-color: #0f766e;
+$primary-hover: #115e59;
+$error-color: #ef4444;
+$text-main: #1e293b;
+$text-sub: #64748b;
+$bg-sub: #f8fafc;
+$border-color: #e2e8f0;
+
+.payModal {
+
+  /* ==========================================================================
+     1. MODAL STRUCTURE OVERRIDES
+     - Handles fixed height and internal scrolling to prevent viewport overflow.
+     ========================================================================== */
+  .ant-modal-content {
+    overflow: hidden;
+    padding: 0;
+    border-radius: 16px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+    /* [CRITICAL] Fix modal height to viewport and enable flex layout */
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ant-modal-header {
+    padding: 24px 24px 12px 24px;
+    border-bottom: none;
+    margin-bottom: 0;
+    flex-shrink: 0;
+    /* Prevent header from shrinking */
+  }
+
+  .ant-modal-body {
+    padding: 0 24px 24px 24px;
+
+    /* [CRITICAL] Enable vertical scrolling for long content */
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    /* Custom Scrollbar Styling */
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #cbd5e1;
+      border-radius: 4px;
+
+      &:hover {
+        background-color: #94a3b8;
+      }
+    }
+  }
+
+  /* ==========================================================================
+     2. HEADER SECTION
+     - Displays Course Name and Total Amount Due.
+     ========================================================================== */
+  .modal-header-center {
+    text-align: center;
+    margin-bottom: 24px;
+
+    .course-name {
+      font-size: 18px;
+      font-weight: 600;
+      color: $text-main;
+    }
+
+    .amount-due {
+      font-size: 28px;
+      font-weight: 800;
+      color: $primary-color;
+      margin-top: 4px;
+      letter-spacing: -0.5px;
+    }
+  }
+
+  /* Container for payment options (Balance & External) */
+  .payment-options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* ==========================================================================
+     3. ACCOUNT BALANCE SECTION
+     - Styling for the wallet usage card, including states (Active/Error).
+     ========================================================================== */
+  .balance-card {
+    background: $bg-sub;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid $border-color;
+    transition: all 0.3s ease;
+
+    /* State: Active (Checkbox Checked) */
+    &.is-active {
+      background: #f0fdfa; // Light Teal
+      border-color: $primary-color;
+    }
+
+    /* State: Error (Invalid Input) */
+    &.has-error {
+      background: #fef2f2; // Light Red
+      border-color: $error-color;
+    }
+
+    .balance-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .balance-checkbox {
+        font-size: 15px;
+        font-weight: 500;
+
+        .checkbox-label {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+
+          .icon {
+            color: $primary-color;
+          }
+        }
+      }
+    }
+
+    .balance-input-area {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba($primary-color, 0.2);
+
+      .input-label-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px;
+        color: $text-sub;
+        margin-bottom: 6px;
+      }
+
+      .custom-input-number {
+        width: 100%;
+        border-radius: 8px;
+        height: 42px;
+        padding-top: 4px;
+
+        &.ant-input-number-status-error {
+          border-color: $error-color !important;
+        }
+      }
+
+      .error-text {
+        color: $error-color;
+        font-size: 12px;
+        margin-top: 6px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+    }
+  }
+
+  /* State: Empty Balance (Informational Card) */
+  .empty-balance-card {
+    background: #f9fafb;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px dashed #cbd5e1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .icon-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .icon {
+        font-size: 20px;
+        color: #94a3b8;
+      }
+    }
+
+    .text-content {
+      display: flex;
+      flex-direction: column;
+
+      .main-text {
+        color: $text-sub;
+        font-weight: 600;
+      }
+
+      .sub-text {
+        font-size: 13px;
+        color: #94a3b8;
+      }
+    }
+  }
+
+  /* ==========================================================================
+     4. EXTERNAL PAYMENT SECTION
+     - Grid layout for Credit Card and Bank Transfer options.
+     ========================================================================== */
+  .external-section {
+    margin-top: 8px;
+
+    .section-divider {
+      margin: 16px 0;
+      color: #94a3b8;
+      font-size: 13px;
+    }
+
+    .method-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+
+      .method-option {
+        border: 1px solid $border-color;
+        background: #fff;
+        padding: 16px;
+        border-radius: 12px;
+        cursor: pointer;
+        text-align: center;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+
+        .icon {
+          font-size: 24px;
+          color: $text-sub;
+          transition: color 0.2s;
+        }
+
+        .label {
+          font-size: 14px;
+          font-weight: 500;
+          color: $text-main;
+        }
+
+        &:hover {
+          border-color: $primary-color;
+          background: #f0fdfa;
+          transform: translateY(-2px);
+
+          .icon {
+            color: $primary-color;
+          }
+        }
+
+        &.is-selected {
+          border: 2px solid $primary-color;
+          background: #f0fdfa;
+          box-shadow: 0 4px 6px -1px rgba(15, 118, 110, 0.1);
+
+          .icon,
+          .label {
+            color: $primary-color;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+
+  /* Success Message: Fully Covered by Balance */
+  .fully-covered-msg {
+    text-align: center;
+    padding: 16px;
+    background: #f0fdfa;
+    border-radius: 8px;
+    margin-top: 10px;
+    border: 1px dashed $primary-color;
+
+    .icon {
+      color: $primary-color;
+      margin-right: 8px;
+    }
+
+    .text {
+      color: $primary-color;
+      font-weight: 600;
+    }
+  }
+
+  /* ==========================================================================
+     5. SUMMARY BREAKDOWN (FOOTER)
+     - Detailed breakdown of costs (Course Fee, Wallet deduction, External pay).
+     ========================================================================== */
+  .payment-summary-breakdown {
+    margin-top: 24px;
+    background: $bg-sub;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid $border-color;
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 14px;
+      color: $text-sub;
+
+      .val {
+        font-weight: 500;
+        color: $text-main;
+      }
+
+      &.wallet-row {
+        color: $primary-color;
+
+        .val {
+          color: inherit;
+        }
+      }
+
+      &.external-row {
+        color: #e11d48;
+
+        .val {
+          color: inherit;
+        }
+      }
+    }
+
+    .summary-divider {
+      margin: 12px 0;
+    }
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .label {
+        font-size: 16px;
+        font-weight: 600;
+        color: $text-main;
+      }
+
+      .amount {
+        font-size: 22px;
+        font-weight: 700;
+        color: $primary-color;
+      }
+
+      &.is-disabled {
+        .amount {
+          color: #94a3b8;
+        }
+      }
+    }
+  }
+
+  /* ==========================================================================
+     6. FOOTER ACTIONS (BUTTONS)
+     - Sticky footer to keep buttons accessible while scrolling.
+     ========================================================================== */
+  .footer-actions {
+    /* [CRITICAL] Sticky positioning for better UX */
+    position: sticky;
+    bottom: -24px;
+    /* Offset padding bottom of modal-body */
+    background: #fff;
+    /* White background to mask scrolling content */
+    padding-top: 16px;
+    padding-bottom: 0;
+    margin-top: 24px;
+    z-index: 10;
+    border-top: 1px solid #f1f5f9;
+
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+
+    .btn-cancel {
+      height: 44px;
+      border-radius: 8px;
+      font-weight: 600;
+      color: $text-sub;
+      border: 1px solid $border-color;
+      background: transparent;
+
+      &:hover {
+        background: $bg-sub;
+        color: $text-main;
+        border-color: #cbd5e1;
+      }
+
+      &:disabled {
+        background: #f1f5f9;
+        color: #cbd5e1;
+        cursor: not-allowed;
+      }
+    }
+
+    .btn-confirm {
+      height: 44px;
+      border-radius: 8px;
+      padding: 0 32px;
+      font-weight: 600;
+      font-size: 15px;
+      border: none;
+
+      background-color: $primary-color;
+      color: #fff;
+      box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+      transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+      &:hover:not(:disabled) {
+        background-color: $primary-hover;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(15, 118, 110, 0.2);
+        border: none;
+        color: #fff;
+      }
+
+      &:active:not(:disabled) {
+        transform: translateY(0);
+        background-color: $primary-color;
+        box-shadow: none;
+      }
+
+      &:disabled {
+        background-color: #e2e8f0;
+        color: #94a3b8;
+        box-shadow: none;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      &.is-error-state {
+        background-color: #e2e8f0;
+        color: #94a3b8;
+        box-shadow: none;
+      }
+    }
+  }
+}

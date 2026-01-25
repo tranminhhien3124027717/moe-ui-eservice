@@ -1,0 +1,458 @@
+@use '../../assets/styles/_variables' as *;
+
+/* ==========================================================================
+   VARIABLES
+   ========================================================================== */
+$primary-teal: #0f766e;
+$primary-green: #389e0d;
+$warning-orange: #faad14;
+$danger-red: #ef4444;
+$text-main: #1e293b;
+$text-sub: #64748b;
+$bg-app: #f8fafc;
+$card-radius: 16px;
+$border-color: #e2e8f0;
+$shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.03);
+
+/* ==========================================================================
+   MAIN LAYOUT CONTAINER
+   ========================================================================== */
+.detailContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding-bottom: 60px;
+  font-family: 'Inter', sans-serif;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+
+  // Mobile: Reduce gap and padding
+  @media (max-width: 768px) {
+    gap: 20px;
+    padding-bottom: 40px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* ==========================================================================
+   1. HEADER NAVIGATION
+   ========================================================================== */
+.headerNav {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+
+  .backBtn {
+    border: none;
+    background: transparent;
+    padding: 0;
+    font-size: 20px;
+    color: $text-sub;
+    cursor: pointer;
+    margin-top: 4px;
+    transition: color 0.2s;
+
+    &:hover {
+      color: $primary-teal;
+      transform: translateX(-4px);
+    }
+  }
+
+  .headerContent {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap; 
+    gap: 12px;
+
+    .titleInfo {
+      h1 {
+        font-size: 24px;
+        font-weight: 800;
+        color: $text-main;
+        margin: 0 0 4px 0;
+        text-transform: uppercase;
+        
+        @media (max-width: 576px) {
+            font-size: 20px;
+        }
+      }
+
+      p {
+        font-size: 14px;
+        color: $text-sub;
+        margin: 0;
+      }
+    }
+
+    .statusTag {
+        @media (max-width: 576px) {
+            margin-top: 8px;
+        }
+    }
+  }
+}
+
+/* ==========================================================================
+   2. SUMMARY STATISTICS CARDS
+   ========================================================================== */
+.summaryRow {
+  display: flex;
+  gap: 24px;
+
+  // Tablet & Mobile: Stack vertically
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .summaryCard {
+    flex: 1;
+    background: #ffffff;
+    border: 1px solid $border-color;
+    border-radius: $card-radius;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: $shadow-soft;
+
+    .iconBox {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+
+      &.yellow { background: #fffbe6; color: $warning-orange; }
+      &.teal { background: #f0fdfa; color: $primary-teal; }
+    }
+
+    .info {
+      display: flex;
+      flex-direction: column;
+
+      .label {
+        font-size: 12px;
+        color: $text-sub;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+      }
+
+      .value {
+        font-size: 24px;
+        font-weight: 700;
+        color: $text-main;
+        word-break: break-all;
+
+        @media (max-width: 576px) {
+             font-size: 20px;
+        }
+      }
+
+      .value.orange { color: $warning-orange; }
+    }
+  }
+}
+
+/* ==========================================================================
+   3. COMMON SECTION CONTAINER
+   ========================================================================== */
+.sectionCard {
+  background: #ffffff;
+  border-radius: $card-radius;
+  border: 1px solid $border-color;
+  box-shadow: $shadow-soft;
+  padding: 32px;
+
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
+
+  .sectionTitle {
+    font-size: 18px;
+    font-weight: 700;
+    color: $text-main;
+    margin-bottom: 24px;
+  }
+}
+
+/* ==========================================================================
+   4. COURSE INFO GRID
+   ========================================================================== */
+.infoGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px 64px;
+
+  @media (max-width: 992px) {
+      gap: 24px 32px;
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .infoItem {
+    display: flex;
+    gap: 16px;
+
+    .itemIcon {
+      font-size: 18px;
+      color: $text-sub;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .itemContent {
+      display: flex;
+      flex-direction: column;
+
+      .label {
+        font-size: 12px;
+        color: $text-sub;
+        margin-bottom: 4px;
+      }
+
+      .value {
+        font-size: 15px;
+        font-weight: 600;
+        color: $text-main;
+        word-break: break-word;
+      }
+    }
+  }
+}
+
+/* ==========================================================================
+   5. UPCOMING BILLING CYCLES (List Card View)
+   ========================================================================== */
+.billingList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .billingItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border: 1px solid #f1f5f9;
+    border-radius: 8px;
+    background-color: #fff;
+    transition: all 0.2s ease;
+
+    &:hover {
+      border-color: #cbd5e1;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transform: translateY(-1px);
+    }
+
+    // Mobile: Stack item theo chiều dọc
+    @media (max-width: 576px) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    // --- LEFT SIDE (Icon + Dates) ---
+    .leftSide {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+
+      .calendarIcon {
+        width: 42px;
+        height: 42px;
+        border-radius: 10px;
+        background-color: #f0f9ff; // Light Blue
+        color: #0284c7; // Dark Blue
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        flex-shrink: 0;
+      }
+
+      .dateInfo {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        .month {
+          font-weight: 700;
+          color: $text-main;
+          font-size: 15px;
+        }
+
+        .subDates {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 13px;
+          flex-wrap: wrap; 
+
+          .billingDate { color: $text-sub; }
+          .separator { color: #cbd5e1; }
+          .due { color: $danger-red; font-weight: 500; }
+        }
+      }
+    }
+
+    // --- RIGHT SIDE (Amount + Status) ---
+    // [UPDATED]: Xếp dọc (Column) và Căn phải (Flex-end)
+    .rightSide {
+      display: flex;
+      flex-direction: column; 
+      align-items: center;    
+      justify-content: center;
+      gap: 6px;                 
+      min-width: 120px;
+
+      @media (max-width: 576px) {
+          width: 100%;
+          align-items: center;
+          flex-direction: row; 
+          justify-content: space-between;
+          padding-top: 12px;
+          border-top: 1px dashed #e2e8f0;
+      }
+
+      .amount {
+        font-weight: 700;
+        color: $text-main;
+        font-size: 16px;
+        line-height: 1;
+      }
+      
+      :global(.ant-tag) {
+          margin: 0;
+      }
+    }
+  }
+}
+
+
+/* ==========================================================================
+   5. SHARED TABLE STYLES (Outstanding & History)
+   ========================================================================== */
+.outstandingTable, 
+.historyTable {
+  border: 1px solid $border-color;
+  border-radius: 12px;
+  overflow: hidden;
+  overflow-x: auto; 
+
+  :global {
+    .ant-table {
+        min-width: 700px; // Ensure min width for horizontal scroll
+    }
+
+    .ant-table-thead > tr > th {
+      background: #f8fafc;
+      color: $text-sub;
+      font-weight: 700;
+      font-size: 12px;
+      text-transform: uppercase;
+      border-bottom: 1px solid $border-color;
+      padding: 14px 24px;
+      white-space: nowrap;
+    }
+
+    .ant-table-tbody > tr > td {
+      padding: 18px 24px;
+      font-size: 14px;
+      color: $text-main;
+      border-bottom: 1px solid #f1f5f9;
+      vertical-align: middle;
+    }
+    
+    // Hover row effect
+    .ant-table-tbody > tr:hover > td {
+      background: #f8fafc !important;
+    }
+  }
+
+  // --- Common Cell Styles ---
+  
+  // 1. Course Name & Provider
+  .courseCell {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    
+    .name {
+      font-size: 15px;
+      font-weight: 600;
+      color: $text-main;
+    }
+    
+    .provider {
+      font-size: 13px;
+      color: $text-sub; 
+    }
+  }
+
+  // 2. Amount Text
+  .amountText {
+    font-weight: 700;
+    color: $text-main;
+    font-size: 15px;
+    
+    // Specific color for Payment History
+    &.paid {
+        color: $primary-green;
+    }
+  }
+  
+  .cycleText, .dateText {
+    color: $text-sub;
+    font-size: 14px;
+  }
+
+  // 3. Due Date with Countdown
+  .dueDateCell {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    
+    .date {
+      font-weight: 600;
+      color: $text-main;
+    }
+    
+    .daysLeft {
+      font-size: 12px;
+      color: $text-sub;
+      margin-top: 2px;
+    }
+  }
+
+  // 4. Action Buttons (Pay Now)
+  .payNowBtn {
+    background: linear-gradient(90deg, #0f766e 0%, #14b8a6 100%);
+    padding: 5px 16px; 
+    border: none;
+    height: 36px;
+    border-radius: 8px;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(15, 118, 110, 0.25);
+    color: #fff;
+    white-space: nowrap; 
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(15, 118, 110, 0.35);
+    }
+  }
+}
