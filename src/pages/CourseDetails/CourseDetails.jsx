@@ -134,18 +134,9 @@ const CourseDetails = () => {
         processUpcomingData(upcomingRes.data.billingCycles, 1);
       }
 
-      // 4. Set Payment History
+      // 4. Set Payment History (Pass raw data, let component handle formatting)
       if (historyRes.data && historyRes.data.paymentHistory) {
-        const items = historyRes.data.paymentHistory.items || [];
-        setHistoryData(items.map((item, idx) => ({
-          key: idx,
-          date: item.transactionDate || item.paymentDate,
-          name: item.courseName,
-          cycle: item.paidCycle || item.billingCycle,
-          amount: formatCurrency(item.amount),
-          method: item.paymentMethod,
-          status: item.status
-        })));
+        setHistoryData(historyRes.data.paymentHistory.items || []);
       }
 
     } catch (error) {

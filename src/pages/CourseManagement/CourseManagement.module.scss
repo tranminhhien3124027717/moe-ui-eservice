@@ -345,6 +345,93 @@ $bg-blue-soft: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
     font-family: 'Inter', sans-serif;
   }
 
+  .expandIcon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: transparent;
+    color: #64748b;
+    cursor: pointer;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $text-dark;
+    }
+  }
+
+  .childTable {
+    width: 100%;
+    table-layout: fixed;
+    background: #f8fafc;
+    
+    // Animation: Hiệu ứng xuất hiện mượt mà
+    animation: slideDown 0.3s ease-out;
+
+    tbody {
+      .childRow {
+        td {
+          font-size: 14px;
+          color: #475569;
+          padding: 16px 24px;
+          border-bottom: 1px solid #e2e8f0;
+          vertical-align: middle;
+        }
+
+        &:last-child td {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+
+  // Animation keyframes
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  // ĐIỀU CHỈNH COLUMN WIDTHS: Đảm bảo width khớp với parent table columns
+  // Cột expand icon space - chiếm chỗ của expand button
+  .childExpandSpace {
+    width: 34px;
+    padding: 0 !important;
+  }
+
+  .childCol1 {
+    width: 280px;  // Phải khớp với Course column
+  }
+
+  .childCol2 {
+    width: 140px;  // Amount column
+  }
+
+  .childCol3 {
+    width: 140px;  // Billing Cycle column
+  }
+
+  .childCol4 {
+    width: 160px;  // Paid Date column
+  }
+
+  .childCol5 {
+    width: 200px;  // Method column
+  }
+
+  .childLabel {
+    font-size: 13px;
+    font-weight: 600;
+    color: #64748b;
+  }
+
   /* --- BUTTONS --- */
   .viewBtn {
     background-color: #f0fdfa;

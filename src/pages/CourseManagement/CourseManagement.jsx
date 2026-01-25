@@ -143,14 +143,9 @@ const CourseManagement = () => {
         const { items, totalCount } = res.data.history;
 
         const mapped = (items || []).map((payment, idx) => ({
-            id: idx + 1, // Hoặc ID thật từ API nếu có
-            key: String(idx + 1),
-            courseName: payment.courseName,
-            university: payment.providerName,
-            amount: formatCurrency(payment.amountPaid),
-            cycle: payment.billingCycle,
-            paidDate: payment.transactionDate || payment.paymentDate,
-            method: payment.paymentMethod
+            ...payment,
+            id: payment?.invoiceId || payment?.id || idx + 1,
+            key: payment?.invoiceId || payment?.id || String(idx + 1)
         }));
 
         setHistory({ 
