@@ -1,0 +1,199 @@
+@use "../../../assets/styles/_variables" as *;
+
+// Local Variables
+$primary-color: #0f766e;
+$text-main: #1e293b;
+$text-sub: #64748b;
+$bg-sub: #f8fafc;
+$border-color: #e2e8f0;
+
+/* ==========================================================================
+   BANK TRANSFER CONTAINER
+   - Layout for the QR code scanning view.
+   ========================================================================== */
+.bank-transfer-container {
+  padding: 8px 0;
+  animation: fadeIn 0.3s ease;
+
+  /* --------------------------------------------------------------------------
+     1. Header (Back Button & Amount)
+     -------------------------------------------------------------------------- */
+  .qr-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .back-btn {
+      padding-left: 0;
+      color: $text-sub;
+      font-weight: 500;
+      
+      &:hover {
+        color: $text-main;
+        background: transparent;
+      }
+    }
+
+    .amount-display {
+      text-align: right;
+      
+      .label {
+        font-size: 12px;
+        color: $text-sub;
+        display: block;
+        line-height: 1;
+        margin-bottom: 4px;
+      }
+      
+      .value {
+        font-size: 18px;
+        font-weight: 700;
+        color: $primary-color;
+      }
+    }
+  }
+
+  /* --------------------------------------------------------------------------
+     2. Status Alert (Waiting for Payment)
+     -------------------------------------------------------------------------- */
+  .status-alert {
+    margin-bottom: 24px;
+    border-radius: 8px;
+    border: 1px solid #bae6fd; // Light blue
+    background-color: #f0f9ff; // Light blue bg
+    
+    .ant-alert-message {
+      color: #0369a1; // Dark blue text
+      font-weight: 600;
+    }
+    
+    .ant-alert-description {
+      color: #0c4a6e;
+      font-size: 13px;
+    }
+  }
+
+  /* --------------------------------------------------------------------------
+     3. QR Code Box
+     -------------------------------------------------------------------------- */
+  .qr-box {
+    background: white;
+    border: 1px solid $border-color;
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+
+    .qr-image-wrapper {
+      text-align: center;
+
+      .qr-image {
+        width: 220px;
+        height: 220px;
+        object-fit: contain;
+        display: block;
+        margin-bottom: 12px;
+      }
+
+      .scan-text {
+        font-size: 13px;
+        font-weight: 600;
+        color: $text-main;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        background: $bg-sub;
+        padding: 6px 12px;
+        border-radius: 20px;
+        display: inline-block;
+      }
+    }
+    
+    .qr-error {
+      height: 200px;
+      width: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: $bg-sub;
+      border-radius: 12px;
+      color: $text-sub;
+      font-weight: 500;
+      font-style: italic;
+    }
+  }
+
+  /* --------------------------------------------------------------------------
+     4. Footer Instructions (Stripe Link)
+     -------------------------------------------------------------------------- */
+  .transfer-details {
+    .instruction-wrapper {
+      text-align: center;
+      margin-top: 10px;
+
+      .instruction-hint {
+        display: block;
+        margin-bottom: 12px;
+        font-size: 13px;
+        color: $text-sub;
+      }
+
+      .btn-instructions {
+        border-radius: 8px;
+        border-color: #cbd5e1;
+        color: $text-main;
+        font-weight: 500;
+        
+        &:hover {
+          color: $primary-color;
+          border-color: $primary-color;
+        }
+      }
+    }
+  }
+}
+
+/* ==========================================================================
+   RESULT SCREENS (Success / Error / Timeout)
+   ========================================================================== */
+.bank-transfer-result {
+  padding: 40px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px; 
+  animation: fadeIn 0.3s ease;
+
+  .ant-result {
+    padding: 0;
+    
+    .ant-result-icon {
+      margin-bottom: 16px;
+      .anticon { font-size: 64px; }
+    }
+    
+    .ant-result-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: $text-main;
+    }
+    
+    .ant-result-subtitle {
+      font-size: 14px;
+      color: $text-sub;
+    }
+  }
+
+  &.success-view .anticon { color: #10b981; } // Green
+  &.error-view .anticon { color: #ef4444; }   // Red
+  &.timeout-view .anticon { color: #f59e0b; } // Amber
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
