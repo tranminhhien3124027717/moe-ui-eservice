@@ -108,7 +108,8 @@ const CourseDetails = () => {
           billingCycle: d.billingCycle,
           feePerCycle: `${formatCurrency(d.feePerCycle)}${d.billingCycle && d.billingCycle !== 'OneTime' ? ' / ' + d.billingCycle : ''}`,
           totalFee: formatCurrency(d.courseTotalFee),
-          outstanding: d.totalOutstandingFee
+          outstanding: d.totalOutstandingFee,
+          educationLevel: d.educationLevel,
         });
       }
 
