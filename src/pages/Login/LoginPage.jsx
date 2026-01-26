@@ -57,10 +57,10 @@ const LoginPage = () => {
       if (error.response) {
         // Case A: Server responded with an error status code
         const { status, data } = error.response;
-        
+        console.log("Error Response Data:", data);
         switch (status) {
           case 400: // Bad Request (Missing fields, invalid format)
-            errorMsg = data?.message || 'Invalid request. Please check your inputs.';
+            errorMsg = data?.errorMessage || 'Invalid request. Please check your inputs.';
             break;
           case 401: // Unauthorized (Wrong credentials)
             errorMsg = 'Incorrect username or password.';
