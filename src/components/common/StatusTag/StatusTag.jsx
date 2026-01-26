@@ -10,7 +10,7 @@ const StatusTag = ({ status }) => {
     switch (s) {
       // --- GREEN (Success) ---
       case "completed":
-      case "fullypaid":
+      case "fully paid":
       case "paid":
       case "balance top-up":
         return "success";
