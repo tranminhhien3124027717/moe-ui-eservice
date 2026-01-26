@@ -88,7 +88,7 @@ const PersonalInfoSection = ({ profileData, onSyncSingPass, syncing }) => {
             value={profileData?.fullName || '-'} 
           />
           <InfoItem 
-            label="NRIC" 
+            label="NRIC/FIN" 
             value={profileData?.nric || '-'} 
           />
           <InfoItem 

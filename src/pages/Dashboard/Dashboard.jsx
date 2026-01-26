@@ -84,9 +84,9 @@ const Dashboard = () => {
                 courseName: course.courseName,
                 university: course.providerName,
                 paymentType: course.paymentType,
-                billingCycle: course.billingCycle,
-                enrolledDate: course.enrollDate || '-',
-                billingDate: course.billingDate || '-',
+                billingCycle: course.billingCycle || '—',
+                enrolledDate: course.enrollDate || '—',
+                billingDate: course.billingDate || '—',
                 status: course.paymentStatus
               };
             } catch (e) {
