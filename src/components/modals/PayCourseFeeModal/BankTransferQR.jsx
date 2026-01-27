@@ -22,6 +22,7 @@ const BankTransferQR = ({ qrData, onBack }) => {
     
     // Extract data
     const invoiceId = qrData?.invoiceId;
+    console.log("[BankTransferQR] Initialized with Invoice ID:", qrData);
     
     // State
     const [currentStatus, setCurrentStatus] = useState(TRANSACTION_STATUS.Hold);
@@ -133,7 +134,7 @@ const BankTransferQR = ({ qrData, onBack }) => {
                 </Button>
                 <div className="amount-display">
                     <span className="label">Total to pay:</span>
-                    <span className="value">${qrData.amount?.toLocaleString()}</span>
+                    <span className="value">${qrData.amountFromExternal ? qrData.amountFromExternal.toLocaleString() : qrData.amount?.toLocaleString()}</span>
                 </div>
             </div>
 
