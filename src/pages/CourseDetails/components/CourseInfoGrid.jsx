@@ -18,34 +18,33 @@ const CourseInfoGrid = ({ info }) => {
         <div className={styles.sectionCard}>
             <div className={styles.sectionTitle}>Course Information</div>
             <div className={styles.infoGrid}>
-                
+
                 {/* 1. Course Name */}
                 <InfoItem icon={<BookOutlined />} label="Course Name" value={info.name} />
-                
+
                 {/* 2. Provider */}
                 <InfoItem icon={<BankOutlined />} label="Provider" value={info.provider} />
-                
+
                 {/* 3. Education Level */}
                 <InfoItem icon={<TrophyOutlined />} label="Education Level" value={info.educationLevel} />
 
                 {/* 4. Course Start */}
                 <InfoItem icon={<CalendarOutlined />} label="Course Start" value={formatDate(info.startDate)} />
-                
+
                 {/* 5. Payment Type */}
                 <InfoItem icon={<CreditCardOutlined />} label="Payment Type" value={info.paymentType} />
 
                 {/* 6. Billing Cycle (Only if Recurring) */}
+                <InfoItem icon={<CalendarOutlined />} label="Course End" value={formatDate(info.endDate)} />
+
+
+                {/* 7. Course End (Placed here as per your snippet) */}
                 {info.paymentType === 'Recurring' && (
                     <InfoItem icon={<SyncOutlined />} label="Billing Cycle" value={formatBillingCycle(info.billingCycle)} />
                 )}
 
-                {/* 7. Course End (Placed here as per your snippet) */}
-                <InfoItem icon={<CalendarOutlined />} label="Course End" value={formatDate(info.endDate)} />
-
                 {/* 8. Fee per Cycle (Only if Recurring) */}
-                {info.paymentType === 'Recurring' && (
-                    <InfoItem icon={<DollarOutlined />} label="Fee per Cycle" value={info.feePerCycle} />
-                )}
+                <InfoItem icon={<CalendarOutlined />} label="Enrolled Date" value={formatDate(info.enrolledDate)} />
 
                 {/* 9. Status */}
                 <div className={styles.infoItem}>
@@ -56,6 +55,11 @@ const CourseInfoGrid = ({ info }) => {
                     </div>
                 </div>
 
+                {/* 10. Enrolled Date */}
+
+                {info.paymentType === 'Recurring' && (
+                    <InfoItem icon={<DollarOutlined />} label="Fee per Cycle" value={info.feePerCycle} />
+                )}
             </div>
         </div>
     );

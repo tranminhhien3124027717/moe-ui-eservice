@@ -110,6 +110,7 @@ const CourseDetails = () => {
           totalFee: formatCurrency(d.courseTotalFee),
           outstanding: d.totalOutstandingFee,
           educationLevel: d.educationLevel,
+          enrolledDate: d.enrolledDate,
         });
       }
 
