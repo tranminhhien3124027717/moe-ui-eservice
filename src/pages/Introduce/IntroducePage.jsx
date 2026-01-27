@@ -92,14 +92,14 @@ const IntroducePage = () => {
           </Button>
 
           {/* Action: Go to Admin Portal */}
-          <Button
+          {/* <Button
             size="large"
             icon={<UserOutlined />}
             className={styles.hero__btn_white}
             onClick={() => handleNavigation(ADMIN_PORTAL_URL)}
           >
             Admin Portal
-          </Button>
+          </Button> */}
         </div>
       </section>
 
@@ -154,13 +154,13 @@ const IntroducePage = () => {
               <li><CheckCircleFilled className={styles.portals__check} /> Update profile</li>
             </ul>
             
-            <span 
+            {/* <span 
               className={styles.portals__link} 
               onClick={() => handleNavigation(USER_PORTAL_URL)} 
               style={{ cursor: 'pointer' }}
             >
               Access Portal <ArrowRightOutlined />
-            </span>
+            </span> */}
           </div>
 
           {/* Card 2: Admin Portal */}
@@ -179,13 +179,13 @@ const IntroducePage = () => {
               <li><CheckCircleFilled className={styles.portals__check} /> Fee processing</li>
             </ul>
 
-            <span 
+            {/* <span 
               className={styles.portals__link} 
               onClick={() => handleNavigation(ADMIN_PORTAL_URL)} 
               style={{ cursor: 'pointer' }}
             >
               Access Portal <ArrowRightOutlined />
-            </span>
+            </span> */}
           </div>
 
         </div>
